@@ -1,16 +1,16 @@
-package pl.obrona.managementapi.model;
+package pl.obrona.managementapi.model.product;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SoftDelete;
 
 import java.math.BigDecimal;
 
@@ -19,21 +19,20 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@SoftDelete
 @Entity
-public class Product {
-    
+public class ProductComponent {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String description;
+    @ManyToOne
+    private Product product;
 
-    @Enumerated(EnumType.STRING)
-    private ProductCategory category;
+    @ManyToOne
+    private Ingredient ingredient;
 
-    private BigDecimal price;
-    private BigDecimal quantity;
-    private BigDecimal unitPrice;
+    private BigDecimal amount;
 
 }
