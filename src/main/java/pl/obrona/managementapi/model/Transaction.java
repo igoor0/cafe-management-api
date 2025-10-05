@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,6 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -35,6 +37,9 @@ public class Transaction {
     private Employee employee;
 
     private BigDecimal totalAmount;
+
+    @OneToMany(mappedBy = "transaction")
+    private Set<Product> products;
 
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
