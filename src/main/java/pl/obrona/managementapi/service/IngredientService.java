@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.obrona.managementapi.exception.NotFoundException;
 import pl.obrona.managementapi.mapper.IngredientMapper;
+import pl.obrona.managementapi.model.Ingredient;
 import pl.obrona.managementapi.model.command.CreateIngredientCommand;
-import pl.obrona.managementapi.model.dto.product.IngredientDto;
-import pl.obrona.managementapi.model.product.Ingredient;
+import pl.obrona.managementapi.model.dto.IngredientDto;
 import pl.obrona.managementapi.repository.IngredientRepository;
 
 import java.util.List;
@@ -34,5 +34,9 @@ public class IngredientService {
         Ingredient ingredient = ingredientRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Ingredient not found with id: " + id));
         return mapToDto(ingredient);
+    }
+
+    public void deleteById(Long id) {
+        ingredientRepository.deleteById(id);
     }
 }

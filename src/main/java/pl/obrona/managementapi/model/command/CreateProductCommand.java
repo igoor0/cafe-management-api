@@ -13,6 +13,4 @@ public class CreateProductCommand {
     private BigDecimal price;
     private Set<Long> productComponentIds;
     private boolean takeaway;
-
-    //todo walidacja w commandach
 }

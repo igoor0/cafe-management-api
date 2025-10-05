@@ -1,9 +1,10 @@
-package pl.obrona.managementapi.model.product;
+package pl.obrona.managementapi.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,5 +36,8 @@ public class Product {
     private Set<ProductComponent> productComponents;
 
     private boolean takeaway;
+
+    @ManyToOne
+    private Transaction transaction;
 
 }

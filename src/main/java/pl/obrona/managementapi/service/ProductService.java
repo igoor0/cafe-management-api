@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.obrona.managementapi.exception.NotFoundException;
 import pl.obrona.managementapi.mapper.ProductMapper;
+import pl.obrona.managementapi.model.Product;
 import pl.obrona.managementapi.model.command.CreateProductCommand;
 import pl.obrona.managementapi.model.dto.ProductDto;
-import pl.obrona.managementapi.model.product.Product;
 import pl.obrona.managementapi.repository.ProductRepository;
 
 import java.util.List;

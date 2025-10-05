@@ -3,6 +3,7 @@ package pl.obrona.managementapi.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import pl.obrona.managementapi.model.command.CreateIngredientCommand;
-import pl.obrona.managementapi.model.dto.product.IngredientDto;
+import pl.obrona.managementapi.model.dto.IngredientDto;
 import pl.obrona.managementapi.service.IngredientService;
 
 import java.util.List;
@@ -39,4 +40,14 @@ public class IngredientController {
     public IngredientDto getById(@PathVariable Long id) {
         return ingredientService.getById(id);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) {
+        ingredientService.deleteById(id);
+    }
+
+//    @PatchMapping("/{id}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public IngredientDto updateStockQuantity
 }

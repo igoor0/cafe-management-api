@@ -1,12 +1,10 @@
 package pl.obrona.managementapi.mapper;
 
 import lombok.experimental.UtilityClass;
+import pl.obrona.managementapi.model.Product;
+import pl.obrona.managementapi.model.ProductComponent;
 import pl.obrona.managementapi.model.command.CreateProductCommand;
 import pl.obrona.managementapi.model.dto.ProductDto;
-import pl.obrona.managementapi.model.product.Product;
-import pl.obrona.managementapi.model.product.ProductComponent;
-
-import java.util.stream.Collectors;
 
 @UtilityClass
 public class ProductMapper {
@@ -25,7 +23,7 @@ public class ProductMapper {
                 .price(product.getPrice())
                 .productComponentIds(product.getProductComponents().stream()
                         .map(ProductComponent::getId)
-                        .collect(Collectors.toSet()))
+                        .toList())
                 .takeaway(product.isTakeaway())
                 .build();
     }
