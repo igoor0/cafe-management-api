@@ -41,4 +41,7 @@ public class Ingredient {
     private BigDecimal stockQuantity;
     private BigDecimal unitCost;
 
+    public void restock(BigDecimal stockQuantity) {
+        stockQuantity.add(stockQuantity);
+    }
 }
