@@ -8,6 +8,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-springdoc:
-  swagger-ui:
-    path: "/swagger-ui/index.html"
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:insert.sql
