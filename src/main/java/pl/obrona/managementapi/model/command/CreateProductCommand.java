@@ -11,6 +11,6 @@ import java.util.Set;
 public class CreateProductCommand {
     private String name;
     private BigDecimal price;
-    private Set<Long> productComponentIds;
+    private Set<ComponentCommand> productComponents;
     private boolean takeaway;
 }

@@ -2,9 +2,9 @@ package pl.obrona.managementapi;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 import pl.obrona.managementapi.model.Employee;
 import pl.obrona.managementapi.model.PaymentMethod;
 import pl.obrona.managementapi.model.Product;
@@ -20,11 +20,10 @@ import java.util.Random;
 
 @Slf4j
 @Service
-//@Profile("demo")
+@Profile("demo")
 @RequiredArgsConstructor
 public class TransactionScheduler {
 
-    private final WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080").build();
     private final EmployeeRepository employeeRepository;
     private final ProductRepository productRepository;
     private final TransactionService transactionService;

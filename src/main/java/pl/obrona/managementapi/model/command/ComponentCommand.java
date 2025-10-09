@@ -7,8 +7,7 @@ import java.math.BigDecimal;
 
 @Data
 @Builder
-public class CreateProductComponentCommand {
-    private Long productId;
+public class ComponentCommand {
     private Long ingredientId;
     private BigDecimal amount;
 }
