@@ -1,10 +1,10 @@
 package pl.obrona.managementapi.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,13 +31,9 @@ public class Product {
 
     private String name;
     private BigDecimal price;
-
-    @OneToMany(mappedBy = "product")
-    private Set<ProductComponent> productComponents;
-
     private boolean takeaway;
 
-    @ManyToOne
-    private Transaction transaction;
+    @OneToMany(mappedBy = "product", cascade =  CascadeType.ALL, orphanRemoval = true)
+    private Set<ProductComponent> productComponents;
 
 }

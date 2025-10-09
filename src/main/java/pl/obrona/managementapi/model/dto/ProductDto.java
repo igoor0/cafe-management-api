@@ -14,5 +14,4 @@ public class ProductDto {
     private BigDecimal price;
     private List<Long> productComponentIds;
     private boolean takeaway;
-    private List<Long> transactionIds;
 }
