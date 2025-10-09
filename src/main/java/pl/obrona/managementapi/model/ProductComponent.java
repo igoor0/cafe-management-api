@@ -28,10 +28,10 @@ public class ProductComponent {
     private Long id;
 
     @ManyToOne
-    private Product product;
+    private Ingredient ingredient;
 
     @ManyToOne
-    private Ingredient ingredient;
+    private Product product;
 
     private BigDecimal amount;
 

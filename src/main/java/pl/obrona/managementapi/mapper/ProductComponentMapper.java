@@ -17,7 +17,6 @@ public class ProductComponentMapper {
     public static ProductComponentDto mapToDto(ProductComponent productComponent) {
         return ProductComponentDto.builder()
                 .id(productComponent.getId())
-                .productId(productComponent.getProduct().getId())
                 .ingredientId(productComponent.getIngredient().getId())
                 .amount(productComponent.getAmount())
                 .build();

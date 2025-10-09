@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 @Builder
 public class ProductComponentDto {
     private Long id;
-    private Long productId;
     private Long ingredientId;
     private BigDecimal amount;
 }
