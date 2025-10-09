@@ -7,7 +7,4 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
-springdoc:
-  swagger-ui:
-    path: "/swagger-ui/index.html"
+      ddl-auto: update
