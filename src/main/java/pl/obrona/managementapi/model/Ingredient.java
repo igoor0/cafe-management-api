@@ -6,7 +6,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +14,6 @@ import lombok.Setter;
 import org.hibernate.annotations.SoftDelete;
 
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -35,13 +33,7 @@ public class Ingredient {
     @Enumerated(EnumType.STRING)
     private Unit unit;
 
-    @OneToMany(mappedBy = "ingredient")
-    private Set<ProductComponent> productComponents;
-
     private BigDecimal stockQuantity;
     private BigDecimal unitCost;
 
-    public void restock(BigDecimal stockQuantity) {
-        stockQuantity.add(stockQuantity);
-    }
 }

@@ -2,7 +2,6 @@ package pl.obrona.managementapi.mapper;
 
 import lombok.experimental.UtilityClass;
 import pl.obrona.managementapi.model.Ingredient;
-import pl.obrona.managementapi.model.ProductComponent;
 import pl.obrona.managementapi.model.command.CreateIngredientCommand;
 import pl.obrona.managementapi.model.dto.IngredientDto;
 
@@ -23,9 +22,6 @@ public class IngredientMapper {
                 .id(ingredient.getId())
                 .name(ingredient.getName())
                 .unit(ingredient.getUnit())
-                .productComponentIds(ingredient.getProductComponents().stream()
-                        .map(ProductComponent::getId)
-                        .toList())
                 .stockQuantity(ingredient.getStockQuantity())
                 .unitCost(ingredient.getUnitCost())
                 .build();

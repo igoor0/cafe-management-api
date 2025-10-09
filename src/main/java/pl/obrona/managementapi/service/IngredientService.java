@@ -11,6 +11,7 @@ import pl.obrona.managementapi.model.command.RestockCommand;
 import pl.obrona.managementapi.model.dto.IngredientDto;
 import pl.obrona.managementapi.repository.IngredientRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static pl.obrona.managementapi.mapper.IngredientMapper.mapFromCommand;
@@ -23,6 +24,7 @@ public class IngredientService {
 
     public IngredientDto create(CreateIngredientCommand command) {
         Ingredient ingredient = ingredientRepository.save(mapFromCommand(command));
+
         return mapToDto(ingredient);
     }
 
@@ -35,6 +37,7 @@ public class IngredientService {
     public IngredientDto getById(Long id) {
         Ingredient ingredient = ingredientRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Ingredient not found with id: " + id));
+
         return mapToDto(ingredient);
     }
 
@@ -47,8 +50,9 @@ public class IngredientService {
         Ingredient ingredient = ingredientRepository.findWithLockingById(id)
                 .orElseThrow(() -> new NotFoundException("Ingredient not found with id: " + id));
 
-        ingredient.restock(command.getQuantity());
-
+        BigDecimal newQuantity = ingredient.getStockQuantity().add(command.getQuantity());
+        ingredient.setStockQuantity(newQuantity);
+        ingredientRepository.save(ingredient);
         return mapToDto(ingredient);
     }
 }
