@@ -1,5 +1,6 @@
 package pl.obrona.managementapi.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -38,13 +39,13 @@ public class Transaction {
 
     private BigDecimal totalAmount;
 
-    @OneToMany(mappedBy = "transaction")
-    private Set<Product> products;
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<TransactionProduct> transactionProducts;
 
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-    private LocalDateTime dateTime;
+    private LocalDateTime dateTime = LocalDateTime.now();
 
 }

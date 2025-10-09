@@ -7,7 +7,7 @@ import pl.obrona.managementapi.model.PaymentMethod;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Map;
 
 @Getter
 @Builder
@@ -16,7 +16,7 @@ public class TransactionDto {
     private Long id;
     private Long employeeId;
     private BigDecimal totalAmount;
-    private List<Long> productIds;
+    private Map<Long, Integer> productIdQuantities;
     private PaymentMethod paymentMethod;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
