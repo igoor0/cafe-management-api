@@ -35,5 +35,6 @@ public class Ingredient {
 
     private BigDecimal stockQuantity;
     private BigDecimal unitCost;
+    private BigDecimal alertQuantity;
 
 }

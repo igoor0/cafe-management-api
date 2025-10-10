@@ -13,5 +13,6 @@ public class IngredientDto {
     private String name;
     private Unit unit;
     private BigDecimal stockQuantity;
+    private BigDecimal alertQuantity;
     private BigDecimal unitCost;
 }

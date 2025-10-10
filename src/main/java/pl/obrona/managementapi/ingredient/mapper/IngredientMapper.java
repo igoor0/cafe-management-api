@@ -13,6 +13,7 @@ public class IngredientMapper {
                 .name(command.getName())
                 .unit(command.getUnit())
                 .stockQuantity(command.getStockQuantity())
+                .alertQuantity(command.getAlertQuantity())
                 .unitCost(command.getUnitCost())
                 .build();
     }
@@ -23,6 +24,7 @@ public class IngredientMapper {
                 .name(ingredient.getName())
                 .unit(ingredient.getUnit())
                 .stockQuantity(ingredient.getStockQuantity())
+                .alertQuantity(ingredient.getAlertQuantity())
                 .unitCost(ingredient.getUnitCost())
                 .build();
     }

@@ -23,13 +23,11 @@ public class IngredientService {
     private final IngredientRepository ingredientRepository;
 
     public IngredientDto create(CreateIngredientCommand command) {
-        Ingredient ingredient = ingredientRepository.save(mapFromCommand(command));
-
-        return mapToDto(ingredient);
+        return mapToDto(ingredientRepository.save(mapFromCommand(command)));
     }
 
-    public List<IngredientDto> getAll() {
-        return ingredientRepository.findAll().stream()
+    public List<IngredientDto> getAll(Boolean lowStock) {
+        return ingredientRepository.findAllByLowStock(lowStock).stream()
                 .map(IngredientMapper::mapToDto)
                 .toList();
     }
@@ -52,7 +50,7 @@ public class IngredientService {
 
         BigDecimal newQuantity = ingredient.getStockQuantity().add(command.getQuantity());
         ingredient.setStockQuantity(newQuantity);
-        ingredientRepository.save(ingredient);
-        return mapToDto(ingredient);
+        return mapToDto(ingredientRepository.save(ingredient));
     }
+
 }
