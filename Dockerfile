@@ -1,7 +1,7 @@
 FROM gradle:jdk17 AS build
 COPY --chown=gradle:gradle ../.. /home/gradle/src
 WORKDIR /home/gradle/src
-RUN gradle build --no-daemon --DskipTests
+RUN gradle build --no-daemon -x test
 
 FROM openjdk:17
 EXPOSE 8080
