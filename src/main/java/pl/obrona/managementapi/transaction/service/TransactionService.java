@@ -58,16 +58,14 @@ public class TransactionService {
             Long quantity = productCounts.get(product.getId());
 
             TransactionProduct tp = new TransactionProduct();
-            tp.setProduct(product);
             tp.setTransaction(transaction);
+            tp.setProduct(product);
             tp.setName(product.getName());
             tp.setPrice(product.getPrice());
             tp.setTakeaway(product.isTakeaway());
             tp.setQuantity(quantity.intValue());
 
-            transactionProducts.add(tp);
-            totalAmount = totalAmount.add(product.getPrice().multiply(BigDecimal.valueOf(quantity)));
-
+            BigDecimal ingredientsCost = BigDecimal.ZERO;
             for (ProductComponent component : product.getProductComponents()) {
                 Ingredient ingredient = component.getIngredient();
                 BigDecimal usedAmount = component.getAmount().multiply(BigDecimal.valueOf(quantity));
@@ -78,14 +76,22 @@ public class TransactionService {
 
                 ingredient.setStockQuantity(ingredient.getStockQuantity().subtract(usedAmount));
                 ingredientRepository.save(ingredient);
+
+                ingredientsCost = ingredientsCost.add(ingredient.getUnitCost().multiply(usedAmount));
             }
+
+            tp.setIngredientsCost(ingredientsCost);
+
+            transactionProducts.add(tp);
+            totalAmount = totalAmount.add(product.getPrice().multiply(BigDecimal.valueOf(quantity)));
         }
 
         transaction.setTransactionProducts(transactionProducts);
         transaction.setTotalAmount(totalAmount);
 
-        Transaction savedTransaction = transactionRepository.save(transaction);
-        return mapToDto(savedTransaction);
+        transactionRepository.save(transaction);
+
+        return mapToDto(transaction);
     }
 
     public List<TransactionDto> getAll() {

@@ -6,6 +6,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import pl.obrona.managementapi.common.exception.ApiException;
 import pl.obrona.managementapi.common.exception.NotFoundException;
 
@@ -37,6 +38,12 @@ public class GlobalExceptionHandler {
                 exception.getBindingResult().getFieldError().getField(),
                 exception.getBindingResult().getAllErrors().get(0).getDefaultMessage(),
                 LocalDateTime.now(clock));
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionDto handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException exception) {
+        return new ExceptionDto(exception.getMessage(), LocalDateTime.now(clock));
     }
 
 }

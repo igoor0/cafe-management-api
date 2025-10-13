@@ -1,5 +1,6 @@
 package pl.obrona.managementapi.ingredient.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -34,6 +35,7 @@ public class Ingredient {
     private Unit unit;
 
     private BigDecimal stockQuantity;
+    @Column(precision = 10, scale = 5)
     private BigDecimal unitCost;
     private BigDecimal alertQuantity;
 

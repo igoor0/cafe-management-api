@@ -40,4 +40,6 @@ public class TransactionProduct {
 
     private int quantity;
 
+    private BigDecimal ingredientsCost;
+
 }
