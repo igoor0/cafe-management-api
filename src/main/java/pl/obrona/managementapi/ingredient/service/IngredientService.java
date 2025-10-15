@@ -4,6 +4,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.obrona.managementapi.common.exception.NotFoundException;
+import pl.obrona.managementapi.cost.model.CostType;
+import pl.obrona.managementapi.cost.model.FixedCost;
+import pl.obrona.managementapi.cost.repository.FixedCostRepository;
 import pl.obrona.managementapi.ingredient.mapper.IngredientMapper;
 import pl.obrona.managementapi.ingredient.model.Ingredient;
 import pl.obrona.managementapi.ingredient.model.command.CreateIngredientCommand;
@@ -12,6 +15,7 @@ import pl.obrona.managementapi.ingredient.model.dto.IngredientDto;
 import pl.obrona.managementapi.ingredient.repository.IngredientRepository;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static pl.obrona.managementapi.ingredient.mapper.IngredientMapper.mapFromCommand;
@@ -21,6 +25,7 @@ import static pl.obrona.managementapi.ingredient.mapper.IngredientMapper.mapToDt
 @RequiredArgsConstructor
 public class IngredientService {
     private final IngredientRepository ingredientRepository;
+    private final FixedCostRepository fixedCostRepository;
 
     public IngredientDto create(CreateIngredientCommand command) {
         return mapToDto(ingredientRepository.save(mapFromCommand(command)));
@@ -50,7 +55,19 @@ public class IngredientService {
 
         BigDecimal newQuantity = ingredient.getStockQuantity().add(command.getQuantity());
         ingredient.setStockQuantity(newQuantity);
-        return mapToDto(ingredientRepository.save(ingredient));
+        ingredientRepository.save(ingredient);
+
+        BigDecimal costAmount = command.getQuantity().multiply(ingredient.getUnitCost());
+
+        fixedCostRepository.save(FixedCost.builder()
+                .description("Ingredient restock: " + ingredient.getName())
+                .cost(costAmount)
+                .costType(CostType.RESTOCK)
+                .createdAt(LocalDateTime.now())
+                .build()
+        );
+
+        return mapToDto(ingredient);
     }
 
 }

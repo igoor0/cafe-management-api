@@ -21,4 +21,7 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
             where ((:lowStock is null or :lowStock is false) or i.stockQuantity <= i.alertQuantity)
             """)
     List<Ingredient> findAllByLowStock(@Param("lowStock") Boolean lowStock);
+
+    @Query("SELECT i FROM Ingredient i WHERE i.stockQuantity < i.alertQuantity")
+    List<Ingredient> findLowStock();
 }
