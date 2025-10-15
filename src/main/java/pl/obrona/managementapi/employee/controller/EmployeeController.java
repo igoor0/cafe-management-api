@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import pl.obrona.managementapi.employee.model.command.CreateEmployeeCommand;
 import pl.obrona.managementapi.employee.model.dto.EmployeeDto;
 import pl.obrona.managementapi.employee.service.EmployeeService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -46,6 +48,18 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable Long id) {
         employeeService.deleteById(id);
+    }
+
+    @PostMapping("/generateSalary/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public EmployeeDto withdrawSalary(@PathVariable Long id) {
+        return employeeService.withdrawSalary(id);
+    }
+
+    @PatchMapping("/update-hours/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public EmployeeDto updateHours(@PathVariable Long id, @RequestBody BigDecimal updatedHours) {
+        return employeeService.updateHours(id, updatedHours);
     }
 
 }

@@ -14,6 +14,7 @@ import org.hibernate.annotations.SoftDelete;
 import pl.obrona.managementapi.transaction.model.Transaction;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -35,6 +36,8 @@ public class Employee {
     private String phoneNumber;
     private BigDecimal salaryPerHour;
     private BigDecimal hoursWorked;
+    private boolean atWork = true;
+    private LocalDateTime lastLoggedAt;
 
     @OneToMany(mappedBy = "employee")
     private Set<Transaction> transactions;
