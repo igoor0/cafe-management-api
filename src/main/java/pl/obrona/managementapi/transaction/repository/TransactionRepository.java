@@ -20,9 +20,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
 
     @Query("""
-            SELECT COALESCE(SUM(t.totalAmount), 0) 
-            FROM Transaction t 
-            WHERE t.paymentMethod = :method 
+            SELECT COALESCE(SUM(t.totalAmount), 0)
+            FROM Transaction t
+            WHERE t.paymentMethod = :method
             AND t.dateTime BETWEEN :start AND :end
             """)
     BigDecimal sumByPaymentMethodAndDateRange(
@@ -32,8 +32,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     );
 
     @Query("""
-            SELECT COALESCE(SUM(t.totalAmount), 0) 
-            FROM Transaction t 
+            SELECT COALESCE(SUM(t.totalAmount), 0)
+            FROM Transaction t
             WHERE t.dateTime BETWEEN :start AND :end
             """)
     BigDecimal sumTotalRevenue(
@@ -42,9 +42,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     );
 
     @Query("""
-            SELECT COALESCE(SUM(tp.ingredientsCost), 0) 
-            FROM Transaction t 
-            JOIN t.transactionProducts tp 
+            SELECT COALESCE(SUM(tp.ingredientsCost), 0)
+            FROM Transaction t
+            JOIN t.transactionProducts tp
             WHERE t.dateTime BETWEEN :start AND :end
             """)
     BigDecimal sumIngredientsCost(
@@ -53,8 +53,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     );
 
     @Query("""
-            SELECT COALESCE(AVG(t.totalAmount), 0) 
-            FROM Transaction t 
+            SELECT COALESCE(AVG(t.totalAmount), 0)
+            FROM Transaction t
             WHERE t.dateTime BETWEEN :start AND :end
             """)
     BigDecimal averageOrderValue(
@@ -63,8 +63,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     );
 
     @Query("""
-            SELECT COUNT(t) 
-            FROM Transaction t 
+            SELECT COUNT(t)
+            FROM Transaction t
             WHERE t.dateTime BETWEEN :start AND :end
             """)
     Integer countItems(
@@ -83,12 +83,12 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
                                                 @Param("end") LocalDateTime end);
     // ✅ Średnia liczba produktów na transakcję
     @Query("""
-            SELECT COALESCE(AVG(tpCount), 0) 
+            SELECT COALESCE(AVG(tpCount), 0)
             FROM (
-                SELECT COUNT(tp) as tpCount 
-                FROM Transaction t 
-                JOIN t.transactionProducts tp 
-                WHERE t.dateTime BETWEEN :start AND :end 
+                SELECT COUNT(tp) as tpCount
+                FROM Transaction t
+                JOIN t.transactionProducts tp
+                WHERE t.dateTime BETWEEN :start AND :end
                 GROUP BY t.id
             )
             """)
@@ -121,8 +121,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
 
     @Query("""
-            SELECT max(t.totalAmount) 
-            FROM Transaction t 
+            SELECT max(t.totalAmount)
+            FROM Transaction t
             WHERE t.dateTime BETWEEN :start AND :end
             """)
     BigDecimal getHighestOrderValue(

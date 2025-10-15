@@ -11,23 +11,18 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 @Component
 @RequiredArgsConstructor
 public class EmployeeScheduler {
 
     private final EmployeeRepository employeeRepository;
-    private final Random random = new Random();
-
-    private final double loginPercentage = 0.6;   // 60% pracowników
-    private final double logoutPercentage = 1;
 
     // Logowanie o 8:15
     @Scheduled(cron = "0 15 8 * * ?")
     public void loginEmployees() {
         List<Employee> employees = employeeRepository.findAllByAtWorkFalse();
-        int countToLogin = (int) Math.ceil(employees.size() * loginPercentage);
+        int countToLogin = (int) Math.ceil(employees.size() * 0.6);
 
         Collections.shuffle(employees);
         for (int i = 0; i < countToLogin; i++) {
@@ -43,11 +38,9 @@ public class EmployeeScheduler {
     @Scheduled(cron = "0 30 21 * * ?")
     public void logoutEmployees() {
         List<Employee> employees = employeeRepository.findAllByAtWorkTrue();
-        int countToLogout = (int) Math.ceil(employees.size() * logoutPercentage);
 
         Collections.shuffle(employees);
-        for (int i = 0; i < countToLogout; i++) {
-            Employee employee = employees.get(i);
+        for (Employee employee : employees) {
             employee.setAtWork(false);
 
             if (employee.getLastLoggedAt() != null) {
