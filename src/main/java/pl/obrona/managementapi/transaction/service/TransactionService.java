@@ -61,7 +61,7 @@ public class TransactionService {
             tp.setTransaction(transaction);
             tp.setProduct(product);
             tp.setName(product.getName());
-            tp.setPrice(product.getPrice());
+            tp.setPrice(product.getPrice().multiply(BigDecimal.valueOf(quantity)));
             tp.setTakeaway(product.isTakeaway());
             tp.setQuantity(quantity.intValue());
 
