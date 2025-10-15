@@ -32,7 +32,7 @@ public class TransactionScheduler {
     public void generateRandomTransaction() {
         Random random = new Random();
 
-        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employees = employeeRepository.findAllByAtWorkTrue();
         List<Product> products = productRepository.findAll();
 
         if (employees.isEmpty() || products.isEmpty()) {
