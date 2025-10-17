@@ -55,13 +55,13 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // Allow specific origins
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        configuration.addAllowedOrigin("*");
 
         // Allow specific HTTP methods
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
         // Allow specific headers
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.addAllowedHeader("*");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
