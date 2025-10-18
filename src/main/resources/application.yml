@@ -3,4 +3,4 @@ spring:
     url: ${JDBC_URL}
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update

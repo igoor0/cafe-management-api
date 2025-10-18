@@ -35,7 +35,7 @@ public class Ingredient {
     private Unit unit;
 
     private BigDecimal stockQuantity;
-    @Column(scale = 5)
+    @Column(precision = 3, scale = 3)
     private BigDecimal unitCost;
     private BigDecimal alertQuantity;
 
