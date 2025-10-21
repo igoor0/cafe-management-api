@@ -27,6 +27,7 @@ public class EmployeeMapper {
                 .phoneNumber(employee.getPhoneNumber())
                 .salaryPerHour(employee.getSalaryPerHour())
                 .hoursWorked(employee.getHoursWorked())
+                .actualSalary(employee.getSalaryPerHour().multiply(employee.getHoursWorked()))
                 .build();
     }
 }

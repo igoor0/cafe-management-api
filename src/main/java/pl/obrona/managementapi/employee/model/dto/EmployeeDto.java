@@ -15,4 +15,5 @@ public class EmployeeDto {
     private String phoneNumber;
     private BigDecimal salaryPerHour;
     private BigDecimal hoursWorked;
+    private BigDecimal actualSalary;
 }
