@@ -29,6 +29,7 @@ public class EmployeeService {
 
     public EmployeeDto create(CreateEmployeeCommand command) {
         Employee employee = mapFromCommand(command);
+        employee.setHoursWorked(BigDecimal.ZERO);
         return mapToDto(employeeRepository.save(employee));
     }
 
