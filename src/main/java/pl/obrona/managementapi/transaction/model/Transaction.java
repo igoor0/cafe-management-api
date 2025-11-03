@@ -40,7 +40,7 @@ public class Transaction {
 
     private BigDecimal totalAmount;
 
-    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<TransactionProduct> transactionProducts;
 
     @Enumerated(EnumType.STRING)

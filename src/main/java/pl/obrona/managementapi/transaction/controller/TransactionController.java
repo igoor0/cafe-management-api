@@ -2,6 +2,9 @@ package pl.obrona.managementapi.transaction.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.obrona.managementapi.transaction.model.command.CreateTransactionCommand;
 import pl.obrona.managementapi.transaction.model.dto.TransactionDto;
 import pl.obrona.managementapi.transaction.service.TransactionService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/transactions")
@@ -30,8 +31,8 @@ public class TransactionController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<TransactionDto> getAll() {
-        return transactionService.getAll();
+    public Page<TransactionDto> getAll(@PageableDefault Pageable pageable) {
+        return transactionService.getAll(pageable);
     }
 
     @GetMapping("/{id}")

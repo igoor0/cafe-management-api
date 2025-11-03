@@ -2,6 +2,8 @@ package pl.obrona.managementapi.transaction.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.obrona.managementapi.common.exception.ApiException;
 import pl.obrona.managementapi.common.exception.NotFoundException;
@@ -94,10 +96,9 @@ public class TransactionService {
         return mapToDto(transaction);
     }
 
-    public List<TransactionDto> getAll() {
-        return transactionRepository.findAll().stream()
-                .map(TransactionMapper::mapToDto)
-                .toList();
+    public Page<TransactionDto> getAll(Pageable pageable) {
+        return transactionRepository.findAll(pageable)
+                .map(TransactionMapper::mapToDto);
     }
 
     public TransactionDto getById(Long id) {
