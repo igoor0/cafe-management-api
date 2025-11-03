@@ -28,7 +28,8 @@ public class IngredientService {
     private final FixedCostRepository fixedCostRepository;
 
     public IngredientDto create(CreateIngredientCommand command) {
-        return mapToDto(ingredientRepository.save(mapFromCommand(command)));
+        Ingredient ingredient = mapFromCommand(command);
+        return mapToDto(ingredientRepository.save(ingredient));
     }
 
     public List<IngredientDto> getAll(Boolean lowStock) {
