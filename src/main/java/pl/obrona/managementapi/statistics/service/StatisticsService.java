@@ -50,7 +50,7 @@ public class StatisticsService {
                 .averageOrderValue(transactionRepository.averageOrderValue(from, to))
                 .cardIncome(transactionRepository.sumByPaymentMethodAndDateRange(PaymentMethod.CARD, from, to))
                 .cashIncome(transactionRepository.sumByPaymentMethodAndDateRange(PaymentMethod.CASH, from, to))
-                .highestOrderValue(transactionRepository.averageOrderValue(from, to))
+                .highestOrderValue(transactionRepository.getHighestOrderValue(from, to))
                 .totalExpense(totalExpense)
                 .ingredientCosts(ingredientCosts)
                 .fixedCosts(fixedCosts)
