@@ -37,12 +37,12 @@ public class UserService {
     }
 
     public void deleteById(Long id) {
-        if (userRepository.count() == 1) {
-            throw new ApiException("Cannot delete the only user with id: " + id);
-        }
-
         if (!userRepository.existsById(id)) {
             throw new NotFoundException("User not found with id: " + id);
+        }
+
+        if (userRepository.count() == 1) {
+            throw new ApiException("Cannot delete the only user with id: " + id);
         }
 
         userRepository.deleteById(id);
