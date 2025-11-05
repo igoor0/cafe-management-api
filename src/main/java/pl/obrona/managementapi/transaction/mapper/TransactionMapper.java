@@ -24,7 +24,7 @@ public class TransactionMapper {
                 .paymentMethod(transaction.getPaymentMethod())
                 .totalAmount(transaction.getTotalAmount())
                 .productIdQuantities(productIdQuantities)
-                .employeeId(transaction.getEmployee().getId())
+                .employeeId(transaction.getEmployee() != null ? transaction.getEmployee().getId() : 0)
                 .build();
     }
 }

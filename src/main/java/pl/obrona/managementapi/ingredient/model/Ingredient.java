@@ -21,7 +21,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@SoftDelete
+@SoftDelete(columnName = "deleted")
 @Entity
 public class Ingredient {
 
