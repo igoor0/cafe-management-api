@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.obrona.managementapi.common.exception.ApiException;
+import pl.obrona.managementapi.common.exception.NotFoundException;
 
 import java.util.List;
 
@@ -35,4 +36,15 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public void deleteById(Long id) {
+        if (userRepository.count() == 1) {
+            throw new ApiException("Cannot delete the only user with id: " + id);
+        }
+
+        if (!userRepository.existsById(id)) {
+            throw new NotFoundException("User not found with id: " + id);
+        }
+
+        userRepository.deleteById(id);
+    }
 }
