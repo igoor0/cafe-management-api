@@ -27,7 +27,7 @@ public class PdfReportService {
             Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14);
             Paragraph pTitle = new Paragraph(title, titleFont);
             pTitle.setAlignment(Element.ALIGN_CENTER);
-            pTitle.setSpacingAfter(20);
+            pTitle.setSpacingAfter(10);
             document.add(pTitle);
 
             PdfPTable table = new PdfPTable(2);
@@ -53,7 +53,7 @@ public class PdfReportService {
 
             if (stats.getRevenuePerProduct() != null && !stats.getRevenuePerProduct().isEmpty()) {
                 Paragraph revenueHeader = new Paragraph("Revenue Per Product", headerFont);
-                revenueHeader.setSpacingBefore(20);
+                revenueHeader.setSpacingBefore(10);
                 revenueHeader.setSpacingAfter(10);
                 document.add(revenueHeader);
 
@@ -66,7 +66,7 @@ public class PdfReportService {
 
             if (stats.getUnitsSoldPerProduct() != null && !stats.getUnitsSoldPerProduct().isEmpty()) {
                 Paragraph unitsHeader = new Paragraph("Units Sold Per Product", headerFont);
-                unitsHeader.setSpacingBefore(20);
+                unitsHeader.setSpacingBefore(10);
                 unitsHeader.setSpacingAfter(10);
                 document.add(unitsHeader);
 
