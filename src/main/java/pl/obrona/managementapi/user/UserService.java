@@ -21,6 +21,8 @@ public class UserService {
 
         User user = User.builder()
                 .username(command.getUsername())
+                .firstName(command.getFirstName())
+                .lastName(command.getLastName())
                 .password(passwordEncoder.encode(command.getPassword()))
                 .enabled(true)
                 .role(command.getRole())

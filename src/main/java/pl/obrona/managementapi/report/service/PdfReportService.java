@@ -17,7 +17,6 @@ import java.io.ByteArrayOutputStream;
 @Service
 public class PdfReportService {
 
-
     public byte[] generatePdf(String title, ReportStatisticsDto stats) {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             Document document = new Document();
@@ -45,6 +44,7 @@ public class PdfReportService {
             addCell(table, "Total Expense", toStr(stats.getTotalExpense()));
             addCell(table, "Total Profit", toStr(stats.getTotalProfit()));
             addCell(table, "Transaction Count", toStr(stats.getTransactionCount()));
+            addCell(table, "First Transaction Time", stats.getFirstTransactionTime() != null ? stats.getFirstTransactionTime().toString() : "N/A");
             addCell(table, "Last Transaction Time", stats.getLastTransactionTime() != null ? stats.getLastTransactionTime().toString() : "N/A");
             addCell(table, "Average Margin Per Transaction", toStr(stats.getAverageMarginPerTransaction()));
             addCell(table, "Average Items Per Transaction", toStr(stats.getAverageItemsPerTransaction()));
@@ -54,6 +54,7 @@ public class PdfReportService {
             if (stats.getRevenuePerProduct() != null && !stats.getRevenuePerProduct().isEmpty()) {
                 Paragraph revenueHeader = new Paragraph("Revenue Per Product", headerFont);
                 revenueHeader.setSpacingBefore(20);
+                revenueHeader.setSpacingAfter(10);
                 document.add(revenueHeader);
 
                 PdfPTable revenueTable = new PdfPTable(2);
@@ -66,6 +67,7 @@ public class PdfReportService {
             if (stats.getUnitsSoldPerProduct() != null && !stats.getUnitsSoldPerProduct().isEmpty()) {
                 Paragraph unitsHeader = new Paragraph("Units Sold Per Product", headerFont);
                 unitsHeader.setSpacingBefore(20);
+                unitsHeader.setSpacingAfter(10);
                 document.add(unitsHeader);
 
                 PdfPTable unitsTable = new PdfPTable(2);

@@ -20,6 +20,7 @@ public class ReportStatisticsDto {
     private BigDecimal totalExpense;
     private BigDecimal totalProfit;
     private Integer transactionCount;
+    private LocalDateTime firstTransactionTime;
     private LocalDateTime lastTransactionTime;
     private BigDecimal averageMarginPerTransaction;
     private BigDecimal averageItemsPerTransaction;

@@ -36,7 +36,10 @@ public class Employee {
     private String phoneNumber;
     private BigDecimal salaryPerHour;
     private BigDecimal hoursWorked;
+
+    @Builder.Default
     private boolean atWork = true;
+
     private LocalDateTime lastLoggedAt;
 
     @OneToMany(mappedBy = "employee")
